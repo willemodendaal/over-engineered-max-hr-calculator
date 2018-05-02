@@ -1,0 +1,20 @@
+FROM ubuntu:artful
+MAINTAINER willem
+
+# Install CURL
+RUN apt-get --force-yes --assume-yes update \
+  && apt-get --force-yes --assume-yes install curl
+
+# Register dotnet core repos
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+RUN mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-artful-prod artful main" > /etc/apt/sources.list.d/dotnetdev.list'
+
+# Install dotnet core
+RUN apt-get --force-yes --assume-yes install apt-transport-https
+RUN apt-get --force-yes --assume-yes update
+RUN apt-get --force-yes --assume-yes install dotnet-sdk-2.1.4
+
+# Build our app.
+
+# Launch our app.
