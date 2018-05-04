@@ -1,20 +1,18 @@
-FROM ubuntu:artful
-MAINTAINER willem
+FROM microsoft/aspnetcore:2.0 AS base
+WORKDIR /app
+EXPOSE 80
 
-# Install CURL
-RUN apt-get --force-yes --assume-yes update \
-  && apt-get --force-yes --assume-yes install curl
+FROM microsoft/aspnetcore-build:2.0 AS build
+WORKDIR /src
+COPY . .
+RUN dotnet restore
+RUN dotnet build -c Release -o /app
 
-# Register dotnet core repos
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-RUN mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
-RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-artful-prod artful main" > /etc/apt/sources.list.d/dotnetdev.list'
+FROM build as publish
+RUN dotnet publish -c Release -o /app
 
-# Install dotnet core
-RUN apt-get --force-yes --assume-yes install apt-transport-https
-RUN apt-get --force-yes --assume-yes update
-RUN apt-get --force-yes --assume-yes install dotnet-sdk-2.1.4
-
-# Build our app.
-
-# Launch our app.
+# Brand new image, but with output of 'publish'. Will make final image nice and small.
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app .
+ENTRYPOINT ["dotnet", "MaxHrCalculator.dll"]
