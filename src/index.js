@@ -1,1 +1,1 @@
-console.log('Index loaded.');
+console.log('Scripts loaded ok!');
