@@ -1,0 +1,27 @@
+{
+  "name": "over-engineered-max-hr-calculator",
+  "version": "1.0.0",
+  "description": "Max Heart Rate calculator built on a ridiculously over-engineered technology stack.",
+  "main": "index.js",
+  "scripts": {
+    "webpack": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willemodendaal/over-engineered-max-hr-calculator.git"
+  },
+  "author": "Willem Odendaal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/willemodendaal/over-engineered-max-hr-calculator/issues"
+  },
+  "homepage": "https://github.com/willemodendaal/over-engineered-max-hr-calculator#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.3"
+  }
+}
