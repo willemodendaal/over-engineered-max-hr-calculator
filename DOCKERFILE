@@ -4,8 +4,21 @@ EXPOSE 80
 
 FROM microsoft/aspnetcore-build:2.0 AS build
 WORKDIR /src
+#Restore dotnet packages
 COPY *.csproj ./
 RUN dotnet restore
+
+#Restore npm packages
+COPY package.json ./
+RUN npm install
+
+#Webpack build
+COPY webpack.config.js .
+COPY .babelrc .
+COPY src/ ./src/
+RUN npm run webpack
+
+#Build .net dll 
 COPY . .
 RUN dotnet build -c Release -o /app
 
