@@ -10,6 +10,7 @@ RUN dotnet restore
 
 #Restore npm packages
 COPY package.json ./
+COPY package-lock.json ./
 RUN npm install
 
 #Webpack build
