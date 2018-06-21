@@ -29,5 +29,8 @@ RUN cd ..
 RUN rm -rf tmpStage/
 
 RUN dotnet build -c Release -o /app
-RUN ls
-ENTRYPOINT [ "sh" ]
+
+# Brand new image, but with output of 'build'. Will make final image nice and small.
+FROM base AS final
+COPY --from=build app/ .
+ENTRYPOINT ["dotnet", "MaxHrCalculator.dll"]
