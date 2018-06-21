@@ -22,12 +22,12 @@ RUN npm run webpack
 #Build .net dll . Copy all files, except the /dist folder, we don't
 #  want to overwrite what webpack generated with our local machine's /dist folder.
 COPY . ./tmpStage/
-RUN rm -rf tmpStage/wwwroot/dist/ 
-RUN cd tmpStage
-RUN cp -rf * .. 
-RUN cd .. 
-RUN rm -rf tmpStage/
-
+RUN rm -rf tmpStage/wwwroot/dist/
+RUN cd tmpStage \
+    cp -rf * .. \
+    cd .. \
+    rm -rf tmpStage/
+RUN ls
 RUN dotnet build -c Release -o /app
 
 # Brand new image, but with output of 'build'. Will make final image nice and small.
