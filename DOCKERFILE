@@ -29,12 +29,5 @@ RUN cd ..
 RUN rm -rf tmpStage/
 
 RUN dotnet build -c Release -o /app
-
-FROM build as publish
-RUN dotnet publish -c Release -o /app
-
-# Brand new image, but with output of 'publish'. Will make final image nice and small.
-FROM base AS final
-COPY --from=publish app/ .
-COPY --from=publish src/ ./originalSrcWeBuiltFrom/
-ENTRYPOINT ["dotnet", "MaxHrCalculator.dll"]
+RUN ls
+ENTRYPOINT [ "sh" ]
