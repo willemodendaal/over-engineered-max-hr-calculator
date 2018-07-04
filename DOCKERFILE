@@ -3,6 +3,7 @@ WORKDIR /app
 EXPOSE 80
 
 FROM microsoft/aspnetcore-build:2.0 AS build
+EXPOSE 80
 WORKDIR /src
 #Restore dotnet packages
 COPY *.csproj ./
@@ -19,18 +20,30 @@ COPY .babelrc .
 COPY src/ src/
 RUN npm run webpack
 
-#Build .net dll . Copy all files, except the /dist folder, we don't
-#  want to overwrite what webpack generated with our local machine's /dist folder.
+#################################
+# Delete this stuff...
 COPY . ./tmpStage/
 RUN rm -rf tmpStage/wwwroot/dist/
-RUN cd tmpStage \
-    cp -rf * .. \
-    cd .. \
-    rm -rf tmpStage/
-RUN ls
-RUN dotnet build -c Release -o /app
+RUN cd tmpStage && \
+   cp -rf * .. && \
+   cd .. && \
+   rm -rf tmpStage/
+RUN dotnet publish -c Release -o /app
+ENTRYPOINT ["dotnet", "/app/MaxHrCalculator.dll"]
+###################################
 
-# Brand new image, but with output of 'build'. Will make final image nice and small.
-FROM base AS final
-COPY --from=build app/ .
-ENTRYPOINT ["dotnet", "MaxHrCalculator.dll"]
+##Build .net dll . Copy all files, except the /dist folder, we don't
+##  want to overwrite what webpack generated with our local machine's /dist folder.
+#COPY . ./tmpStage/
+#RUN rm -rf tmpStage/wwwroot/dist/
+#RUN cd tmpStage \
+#    cp -rf * .. \
+#    cd .. \
+#    rm -rf tmpStage/
+#
+##RUN dotnet build -c Release -o /app
+#
+## Brand new image, but with output of 'build'. Will make final image nice and small.
+#FROM base AS final
+#COPY --from=build app/ .
+#ENTRYPOINT ["dotnet", "MaxHrCalculator.dll"]
