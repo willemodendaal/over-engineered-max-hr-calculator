@@ -11,11 +11,12 @@ This project is actually meant to be a boilerplate project tying a couple of tec
 ## Technology stack
 
 - Authentication with OAuth and Facebook.
-- React + Redux for the web front-end.
-- Babel + Webpack + the latest javascript.
+✓ React for the web front-end.
+- With Redux on the front-end to manage state.
+✓ Babel + Webpack + the latest javascript.
 - Service Workers for offline capability.
 - PouchDb for offline data synchronization.
 - CouchDb for server-side data storage.
-- ASP.NET Core to serve static pages and handle any server-side logic.
-- Docker to tie it all together!
+✓ ASP.NET Core to serve static pages and handle any server-side logic.
+✓ Docker to tie it all together!
 
