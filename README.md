@@ -12,6 +12,7 @@ This project is actually meant to be a boilerplate project tying a couple of tec
 
 - Authentication with OAuth and Facebook.
 - ✓ React for the web front-end.
+- With React Router for front-end routing.
 - With Redux on the front-end to manage state.
 - ✓ Babel + Webpack + the latest javascript.
 - Service Workers for offline capability.

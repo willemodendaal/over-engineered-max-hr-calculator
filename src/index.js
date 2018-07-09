@@ -15,5 +15,3 @@ class Hello extends React.Component {
     <Hello />,
     document.getElementById('container')
   );
-
-console.log('Scripts loaded ok!23');
