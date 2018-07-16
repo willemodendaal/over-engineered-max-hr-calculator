@@ -1,8 +1,9 @@
-$imageName = 'maxhrcalculator/web:8'
-$runningContainer = $(docker container ls -q -f name=maxhrcalculator)
+$imageName = 'maxhrcalculator/web:9'
+$ErrorActionPreference = "Stop"
+$runningContainer = $(docker container ls -aq -f name=maxhrcalculator)
 if ($runningContainer -ne "")
 {
-    Write-host "Stopping containers $runningContainer"
+    Write-host "Stopping container: '$runningContainer'"
     docker rm -f $runningContainer
 }
 else 
