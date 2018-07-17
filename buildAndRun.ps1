@@ -1,4 +1,4 @@
-$imageName = 'maxhrcalculator/web:9'
+$imageName = 'maxhrcalculator/web:10'
 $ErrorActionPreference = "Stop"
 $runningContainer = $(docker container ls -aq -f name=maxhrcalculator)
 if ($runningContainer -ne "")
