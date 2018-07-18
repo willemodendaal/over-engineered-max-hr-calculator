@@ -1,4 +1,8 @@
-const initialState = {};
+const initialState = 
+{
+    auth: { loggedIn: false },
+    calculator: { age: null, maxHr: null }
+};
 
 export default function(oldState = initialState, action)
 {
