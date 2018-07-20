@@ -4,7 +4,7 @@
   "description": "Max Heart Rate calculator built on a ridiculously over-engineered technology stack.",
   "main": "index.js",
   "scripts": {
-    "webpack": "webpack"
+    "webpack": "webpack --bail"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,7 @@
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
-    "redux": "^4.0.0"
+    "redux": "^4.0.0",
+    "redux-logger": "^3.0.6"
   }
 }
