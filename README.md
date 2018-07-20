@@ -12,7 +12,7 @@ This project is actually meant to be a boilerplate project tying a couple of tec
 
 - ✓ ASP.NET Core to serve static pages and handle any server-side logic.
 - ✓ React for the web front-end.
-- ✓ With React Router for front-end routing. 
+- ✓ With React Router v4 for front-end routing. 
 - ... With Redux on the front-end to manage state.
 - ✓ Using Babel + Webpack + the latest javascript.
 - Authentication with OAuth and Facebook.
