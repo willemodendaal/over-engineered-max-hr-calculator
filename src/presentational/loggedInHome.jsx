@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, NavLink, Route } from 'react-router-dom';
 
-import Calculator from '../presentational/calculator.jsx';
-import About from '../presentational/about.jsx';
+import Calculator from './calculator.jsx';
+import About from './about.jsx';
 
 class LoggedInHome extends React.Component {
 	constructor(props) {

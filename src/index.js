@@ -8,7 +8,6 @@ import { HashRouter } from 'react-router-dom';
 import rootReducer from './reducers/rootReducer';
 import App from './containers/app.jsx';
 
-
 //One global store for the entire app. It is updated by sending actions (via
 //  react-redux) to the reducers in rootReducer.
 const store = createStore(

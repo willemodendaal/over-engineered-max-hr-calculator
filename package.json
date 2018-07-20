@@ -4,7 +4,6 @@
   "description": "Max Heart Rate calculator built on a ridiculously over-engineered technology stack.",
   "main": "index.js",
   "scripts": {
-    "webpack": "webpack --bail"
   },
   "repository": {
     "type": "git",

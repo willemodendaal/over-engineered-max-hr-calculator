@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 
 import { createDoLoginAction } from '../actions/authActions';
 
@@ -16,18 +16,25 @@ class App extends React.Component {
 	render() {
 		let isLoggedIn = this.props.auth.loggedIn;
 		return (
-			<Switch>
-				<Route exact path='/' component={() => 
-					/* If user is not logged in yet, the RequireLogin component will
-						render a 'Redirect' to /login. */
-					<RequireLogin loggedIn={isLoggedIn} loginRoute={"/login"}>
-						<LoggedInHome />
-					</RequireLogin>} 
-				/>
-				<Route path='/login' component={() => 
-					<Login loggedIn={isLoggedIn} doLogin={this.props.doLogin} />} 
-				/>
-			</Switch>
+			<div>
+				<h2>Over-Engineered Max HR Calculator</h2>
+				<hr/>
+				<Switch>
+					<Route exact path='/' component={() => 
+						/* If user is not logged in yet, the RequireLogin component will
+							render a 'Redirect' to /login. */
+						<RequireLogin loggedIn={isLoggedIn} loginRoute="/login">
+							<div>
+								<span>Logged in home</span>
+								<LoggedInHome />
+							</div>
+						</RequireLogin>} 
+					/>
+					<Route path='/login' component={() => 
+						<Login loggedIn={isLoggedIn} doLogin={this.props.doLogin} />} 
+					/>
+				</Switch>
+			</div>
 			);
 	}
 }
@@ -45,7 +52,6 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(App)
+export default withRouter(
+	connect(mapStateToProps,mapDispatchToProps)(App)
+)

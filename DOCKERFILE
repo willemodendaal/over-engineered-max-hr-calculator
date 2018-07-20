@@ -17,7 +17,7 @@ RUN npm install
 COPY webpack.config.js .
 COPY .babelrc .
 COPY src/ src/
-RUN npm run webpack
+RUN ./node_modules/.bin/webpack
 
 ##Build .net dll . Copy all files, except the /dist folder, we don't
 ##  want to overwrite what webpack generated with our local machine's /dist folder.

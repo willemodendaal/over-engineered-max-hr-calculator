@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 
 const Login = (props) => {
+	if (props.loggedIn) {
+		return <Redirect to="/" />
+	}
+
 	return (
 		<div>
 			<span>Is logged in already? {props.loggedIn}</span><br/>
