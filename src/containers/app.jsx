@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Switch, Route, withRouter } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
 import { createDoLoginAction } from '../actions/authActions';
 
@@ -20,7 +20,7 @@ class App extends React.Component {
 				<h2>Over-Engineered Max HR Calculator</h2>
 				<hr/>
 				<Switch>
-					<Route exact path='/' component={() => 
+					<Route path='/secure' component={() => 
 						/* If user is not logged in yet, the RequireLogin component will
 							render a 'Redirect' to /login. */
 						<RequireLogin loggedIn={isLoggedIn} loginRoute="/login">
@@ -33,6 +33,7 @@ class App extends React.Component {
 					<Route path='/login' component={() => 
 						<Login loggedIn={isLoggedIn} doLogin={this.props.doLogin} />} 
 					/>
+                    <Route exact path='/' component={() => <Redirect to="/secure" />} />
 				</Switch>
 			</div>
 			);

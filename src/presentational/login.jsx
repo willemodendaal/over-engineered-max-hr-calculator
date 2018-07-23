@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 const Login = (props) => {
 	if (props.loggedIn) {
-		return <Redirect to="/" />
+		return <Redirect to="/secure" />
 	}
 
 	return (
