@@ -31,7 +31,7 @@ class App extends React.Component {
 						</RequireLogin>} 
 					/>
 					<Route path='/login' component={() => 
-						<Login loggedIn={isLoggedIn} doLogin={this.props.doLogin} />} 
+						<Login loggedIn={isLoggedIn} />} 
 					/>
                     <Route exact path='/' component={() => <Redirect to="/secure" />} />
 				</Switch>
