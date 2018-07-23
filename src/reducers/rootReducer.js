@@ -2,7 +2,9 @@ import {combineReducers } from 'redux';
 
 const initialAuthState = 
 {
-	loggedIn: false
+	loggedIn: false,
+	name: null,
+	id: null
 };
 const reduceAuth = (oldState = initialAuthState, action) =>
 {
