@@ -13,22 +13,28 @@ window.onSignIn = (googleUser) => {
 	console.log('Image URL: ' + profile.getImageUrl());
 	console.log('Email: ' + profile.getEmail());
 
-    Store.dispatch(createDoLoginAction(googleUser));
+	createDoLoginAction(Store.dispatch);
 }
 window.onSignInFailure = (err) => {
 	console.log('Sign in failure!', err);
 }
 
 const Login = ({ loggedIn }) => 
-	loggedIn ? <Redirect to="/secure" />
+{
+	if (window.gapi) {
+		//Force login button to re-render, otherwise it's invisible if you login/logout and then login again.
+		window.gapi.signin2.render('default-login-button', {});
+	}
+
+	return loggedIn ? <Redirect to="/secure" />
 	: (
 		//Is there a way to call a function instead of passing "onSignIn" as a string? The regular way
 		//  of linking callbacks in React doesn't work here.
 		<div>
-			<span>Is logged in already? {loggedIn}</span><br/>
-			<div className="g-signin2" data-onsuccess="onSignIn" data-onfailure="onSignInFailure"></div>
+			<div id="default-login-button" className="g-signin2" data-onsuccess="onSignIn" data-onfailure="onSignInFailure"></div>
 		</div>
 	);
+}
 
 Login.propTypes = {
 	loggedIn: PropTypes.bool.isRequired,

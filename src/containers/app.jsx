@@ -2,17 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
-import { createDoLoginAction } from '../actions/authActions';
-
 import LoggedInHome from '../presentational/loggedInHome.jsx';
 import Login from '../presentational/login.jsx';
+import Logout from '../presentational/logout.jsx';
 import RequireLogin from '../presentational/requireLogin.jsx';
+import { startLogout } from '../actions/authActions';
 
 
 class App extends React.Component {
 	constructor(props) {
-        super(props);
-    }
+		super(props);
+	}
 	render() {
 		let isLoggedIn = this.props.auth.loggedIn;
 		return (
@@ -33,7 +33,11 @@ class App extends React.Component {
 					<Route path='/login' component={() => 
 						<Login loggedIn={isLoggedIn} />} 
 					/>
-                    <Route exact path='/' component={() => <Redirect to="/secure" />} />
+
+					<Route path='/logout' component={() => 
+						<Logout startLogout={this.props.startLogout} authState={this.props.auth} />} 
+					/>
+					<Route exact path='/' component={() => <Redirect to="/secure" />} />
 				</Switch>
 			</div>
 			);
@@ -49,7 +53,7 @@ const mapStateToProps = state => {
   
 const mapDispatchToProps = dispatch => {
 	return {
-		doLogin: () => dispatch(createDoLoginAction())
+		startLogout: () => startLogout(dispatch)
 	}
 }
 
