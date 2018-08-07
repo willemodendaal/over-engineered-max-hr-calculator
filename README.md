@@ -25,4 +25,41 @@ This project is actually meant to be a boilerplate project tying a couple of tec
 - Stricter typing with Flow, TypeScript or similar technology.
 - Unit tests for Redux reducers.
 
+## Front-end routes
+- /  (shows the calculator, but only if the user is logged in)
+- /about
+- /login
+- /logout
+
+## Front-end state
+
+    {
+        auth : {
+            loggedIn: true/false,
+            name: "UserName from google login",
+            status: {
+                loginCallStatus: can be "busy", "failed" or "success",
+                errorMessage: "An error message, if status is failedLogin"
+            }
+        },
+        calculator : { 
+            age: null, 
+            maxHr: null 
+        }
+    }
+
+
+## Front-end component hierarchy
+
+    <Header/>
+    Route /logout renders Logout
+    Route /login renders Login
+    <LoginRequired> (renders Redirect if user not logged in yet)
+        <Switch>
+            Route / renders Calculator
+            Route /about renders About
+        </Switch>
+    </LoginRequired>
+
+
 
