@@ -8,6 +8,7 @@ class LoggedInHome extends React.Component {
 	constructor(props) {
 		super(props);
 	}
+	
 	render() {
 	  return ( 
 		<div>
@@ -15,8 +16,8 @@ class LoggedInHome extends React.Component {
 			  <NavLink to="/secure">Calculator</NavLink> | <NavLink to="/secure/about">About</NavLink> | <NavLink to="/logout">Logout</NavLink>
 			</div>
 			<Switch>
-			  <Route exact path='/secure' component={Calculator} />
-			  <Route path='/secure/about' component={About} />
+				<Route exact path='/' component={Calculator} />
+				<Route path='/about' component={About} />
 			</Switch>
 		</div>
 	  );

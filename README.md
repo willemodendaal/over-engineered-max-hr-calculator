@@ -38,7 +38,8 @@ This project is actually meant to be a boilerplate project tying a couple of tec
             loggedIn: true/false,
             name: "UserName from google login",
             status: {
-                loginCallStatus: can be "busy", "failed" or "success",
+                loginCallStatus: can be null, "busy", "failed" or "success",
+                logoutCallStatus: can be null, "busy", "failed" or "success",
                 errorMessage: "An error message, if status is failedLogin"
             }
         },
@@ -55,10 +56,13 @@ This project is actually meant to be a boilerplate project tying a couple of tec
     Route /logout renders Logout
     Route /login renders Login
     <LoginRequired> (renders Redirect if user not logged in yet)
-        <Switch>
-            Route / renders Calculator
-            Route /about renders About
-        </Switch>
+        <LoggedInHome>
+            <Navlinks...>
+            <Switch>
+                Route / renders Calculator
+                Route /about renders About
+            </Switch>
+        </LoggedInHome>
     </LoginRequired>
 
 

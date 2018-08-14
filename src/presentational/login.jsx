@@ -5,7 +5,8 @@ import Store from '../store/store';
 import { createDoLoginAction } from '../actions/authActions';
 
 //todo: Is there a way to do this without attaching to the 'window' object?
-//  normal react function callbacks don't seem to work.
+//  normal react function callbacks don't seem to work. Saw a similar approach
+//  in other github projects, so seems to be the only way to go about it.
 window.onSignIn = (googleUser) => {
 	var profile = googleUser.getBasicProfile();
 	console.log('ID: ' + profile.getId());
@@ -22,11 +23,11 @@ window.onSignInFailure = (err) => {
 const Login = ({ loggedIn }) => 
 {
 	if (window.gapi) {
-		//Force login button to re-render, otherwise it's invisible if you login/logout and then login again.
+		//Force google login button to re-render, otherwise it's invisible if you login/logout and then login again.
 		window.gapi.signin2.render('default-login-button', {});
 	}
 
-	return loggedIn ? <Redirect to="/secure" />
+	return loggedIn ? <Redirect to="/" />
 	: (
 		//Is there a way to call a function instead of passing "onSignIn" as a string? The regular way
 		//  of linking callbacks in React doesn't work here.

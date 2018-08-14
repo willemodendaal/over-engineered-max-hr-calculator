@@ -4,11 +4,18 @@ import { Redirect } from 'react-router-dom';
 
 const Logout = ({startLogout, authState}) => 
 {
-	console.log('Loading logout component...')
-	if (!authState.busyLoggingOut)
+	if (!authState.status.logoutCallStatus)
 	{
 		startLogout();
-		return <div>{authState.message}</div>
+		return <div>Logging out</div>
+	}
+	else if (authState.status.logoutCallStatus == 'failed')
+	{
+		return <div>Error logging out:{authState.status.errorMessage}</div>
+	}
+	else if (authState.status.logoutCallStatus == 'busy')
+	{
+		return <div>Logging out...</div>
 	}
 
 	console.log('Logout OK. Redirecting home...')
