@@ -15,13 +15,25 @@ const reduceAuth = (oldState = initialAuthState, action) =>
 		case 'LOGIN_COMPLETE':
 			return Object.assign({}, oldState, {
 				loggedIn: true,
-				name: null, //todo: assign value.
+				name: action.userName,
 				status: {
 					loginCallStatus: 'success',
 					logoutCallStatus: null,
 					errorMessage: null
 				}
 			});
+		case 'LOGIN_FAILED':
+			return Object.assign({}, oldState, {
+				loggedIn: false,
+				name: null, 
+				status: {
+					loginCallStatus: 'failed',
+					logoutCallStatus: null,
+					errorMessage: action.error
+				}
+			});
+
+			
 		case 'LOGOUT_START':
 			return Object.assign({}, oldState, {
 				status: {

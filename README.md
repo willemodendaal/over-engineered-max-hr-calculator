@@ -15,14 +15,14 @@ This project is actually meant to be a boilerplate project tying a couple of tec
 - ✓ With React Router v4 for front-end routing. 
 - ✓ With Redux on the front-end to manage state.
 - ✓ Using Babel + Webpack + the latest javascript.
-- ✓ Authentication with Google OAuth.
+- ... Authentication with Google OAuth (using `react-google-login` npm package).
 - Service Workers for offline capability.
 - PouchDb for offline data synchronization.
 - CouchDb for server-side data storage.
 - ✓ Docker to tie it all together!
 
 ## Stretch goals:
-- Stricter typing with Flow, TypeScript or similar technology.
+- Stricter typing with TypeScript.
 - Unit tests for Redux reducers.
 
 ## Front-end routes

@@ -1,44 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import Store from '../store/store';
-import { createDoLoginAction } from '../actions/authActions';
+import GoogleLogin from 'react-google-login';
 
-//todo: Is there a way to do this without attaching to the 'window' object?
-//  normal react function callbacks don't seem to work. Saw a similar approach
-//  in other github projects, so seems to be the only way to go about it.
-window.onSignIn = (googleUser) => {
-	var profile = googleUser.getBasicProfile();
-	console.log('ID: ' + profile.getId());
-	console.log('Name: ' + profile.getName());
-	console.log('Image URL: ' + profile.getImageUrl());
-	console.log('Email: ' + profile.getEmail());
-
-	createDoLoginAction(Store.dispatch);
-}
-window.onSignInFailure = (err) => {
-	console.log('Sign in failure!', err);
-}
-
-const Login = ({ loggedIn }) => 
+const Login = ({ loggedIn, loginSuccess, loginFailed }) => 
 {
-	if (window.gapi) {
-		//Force google login button to re-render, otherwise it's invisible if you login/logout and then login again.
-		window.gapi.signin2.render('default-login-button', {});
-	}
+	const clientId = document.head.querySelector("[name=google-signin-client_id]").content;
 
 	return loggedIn ? <Redirect to="/" />
-	: (
-		//Is there a way to call a function instead of passing "onSignIn" as a string? The regular way
-		//  of linking callbacks in React doesn't work here.
-		<div>
-			<div id="default-login-button" className="g-signin2" data-onsuccess="onSignIn" data-onfailure="onSignInFailure"></div>
-		</div>
-	);
+		: (
+			<GoogleLogin 
+				buttonText="Login"
+				clientId={clientId}
+				onSuccess={loginSuccess}
+				onFailure={loginFailed} />
+		);
 }
 
 Login.propTypes = {
 	loggedIn: PropTypes.bool.isRequired,
+	loginSuccess: PropTypes.func.isRequired,
+	loginFailed: PropTypes.func.isRequired,
+	authState: PropTypes.object.isRequired
 };
 
 export default Login;

@@ -7,7 +7,7 @@ import Login from '../presentational/login.jsx';
 import Logout from '../presentational/logout.jsx';
 import Header from '../presentational/header.jsx';
 import RequireLogin from '../presentational/requireLogin.jsx';
-import { startLogout } from '../actions/authActions';
+import { startLogout, createLoginSucceededAction, createLoginFailedAction } from '../actions/authActions';
 
 
 class App extends React.Component {
@@ -25,13 +25,14 @@ class App extends React.Component {
 	render() {
 		const isLoggedIn = this.props.auth.loggedIn;
 		const logout = () => <Logout startLogout={this.props.startLogout} authState={this.props.auth} />
+		const login = () => <Login loggedIn={isLoggedIn} loginSuccess={this.props.loginSuccess} loginFailed={this.props.loginFailed} authState={this.props.auth} />
 		
 		return (
 			<div>
 				<Header/>
 				<Switch>
 					<Route path='/logout' component={logout} />
-					<Route path='/login' component={Login} />
+					<Route path='/login' component={login} />
 				</Switch>
 				<RequireLogin loggedIn={isLoggedIn} loginRoute="/login">
 					<LoggedInHome />
@@ -50,7 +51,9 @@ const mapStateToProps = state => {
   
 const mapDispatchToProps = dispatch => {
 	return {
-		startLogout: () => startLogout(dispatch)
+		startLogout: () => startLogout(dispatch),
+		loginSuccess: (googleUser) => createLoginSucceededAction(dispatch, googleUser), 
+		loginFailed: (err) => createLoginFailedAction(dispatch, err)
 	}
 }
 

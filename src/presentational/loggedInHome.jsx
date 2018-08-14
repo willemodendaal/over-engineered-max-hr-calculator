@@ -13,7 +13,7 @@ class LoggedInHome extends React.Component {
 	  return ( 
 		<div>
 			<div id="top-menu">
-			  <NavLink to="/secure">Calculator</NavLink> | <NavLink to="/secure/about">About</NavLink> | <NavLink to="/logout">Logout</NavLink>
+			  <NavLink to="/">Calculator</NavLink> | <NavLink to="/about">About</NavLink> | <NavLink to="/logout">Logout</NavLink>
 			</div>
 			<Switch>
 				<Route exact path='/' component={Calculator} />
