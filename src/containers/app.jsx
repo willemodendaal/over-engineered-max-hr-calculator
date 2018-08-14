@@ -35,7 +35,7 @@ class App extends React.Component {
 					<Route path='/login' component={login} />
 				</Switch>
 				<RequireLogin loggedIn={isLoggedIn} loginRoute="/login">
-					<LoggedInHome />
+					<LoggedInHome userName={this.props.auth.name} />
 				</RequireLogin>
 			</div>
 		);
