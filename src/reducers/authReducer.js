@@ -2,9 +2,10 @@ const initialAuthState =
 {
 	loggedIn: false,
 	name: null,
-	id: null,
-	message: null,
-	busyLoggingOut: false
+	status: {
+		loginCallStatus: null,
+		errorMessage: null
+	}
 };
 
 const reduceAuth = (oldState = initialAuthState, action) =>
@@ -13,28 +14,41 @@ const reduceAuth = (oldState = initialAuthState, action) =>
 	{
 		case 'LOGIN_COMPLETE':
 			return Object.assign({}, oldState, {
-				message: null,
 				loggedIn: true,
-				busyLoggingOut: false
+				name: null, //todo: assign value.
+				status: {
+					loginCallStatus: 'success',
+					logoutCallStatus: null,
+					errorMessage: null
+				}
 			});
 		case 'LOGOUT_START':
 			return Object.assign({}, oldState, {
-				message: 'Logging out...',
-				loggedIn: true,
-				busyLoggingOut: true
+				status: {
+					loginCallStatus: null,
+					logoutCallStatus: 'busy',
+					errorMessage: null
+				}
 			});
 		case 'LOGOUT_COMPLETE':
 			return Object.assign({}, oldState, {
 				loggedIn: false,
-				error: null,
-				busyLoggingOut: false,
-				message: null
+				name: null, 
+				status: {
+					loginCallStatus: null,
+					logoutCallStatus: 'success',
+					errorMessage: null
+				}
 			});
 		case 'LOGOUT_FAILED':
 			return Object.assign({}, oldState, {
-				message: action.error,
-				loggedIn: true,
-				busyLoggingOut: false
+				loggedIn: false,
+				name: null, 
+				status: {
+					loginCallStatus: null,
+					logoutCallStatus: 'failed',
+					errorMessage: action.error
+				}
 			});
 	}
 	return oldState;

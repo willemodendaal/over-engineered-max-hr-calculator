@@ -15,7 +15,7 @@ This project is actually meant to be a boilerplate project tying a couple of tec
 - ✓ With React Router v4 for front-end routing. 
 - ✓ With Redux on the front-end to manage state.
 - ✓ Using Babel + Webpack + the latest javascript.
-- ... Authentication with Google OAuth.
+- ✓ Authentication with Google OAuth.
 - Service Workers for offline capability.
 - PouchDb for offline data synchronization.
 - CouchDb for server-side data storage.
